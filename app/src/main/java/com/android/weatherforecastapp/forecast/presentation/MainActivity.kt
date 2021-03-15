@@ -17,6 +17,7 @@ import com.android.weatherforecastapp.forecast.domain.model.WeatherForeCastModel
 import com.android.weatherforecastapp.forecast.presentation.adapter.CityAdapter
 import com.android.weatherforecastapp.forecast.presentation.adapter.OnCityClickAction
 import com.android.weatherforecastapp.forecast.presentation.adapter.WeatherForecastAdapter
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -93,9 +94,14 @@ class MainActivity : AppCompatActivity() {
     private fun setupObservers() {
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
 
+        viewModel.messageObservable.observe(this, ::observeMessage)
         viewModel.isLoadingObservable.observe(this, ::observeLoading)
         viewModel.cityListObservable.observe(this, ::observeCities)
         viewModel.forecastsObservable.observe(this, ::observeWeatherForecasts)
+    }
+
+    private fun observeMessage(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
     }
 
     private fun observeLoading(isLoading: Boolean) {

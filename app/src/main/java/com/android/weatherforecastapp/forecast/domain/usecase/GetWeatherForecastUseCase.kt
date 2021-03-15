@@ -30,6 +30,7 @@ class GetWeatherForecastUseCase @Inject constructor(
             .concatMap { reverseTheList(it).toFlowable() }
             .concatMap { prepareResult(it).toFlowable() }
             .single(GetForeCastResult.Error(errorHandler.getMessage(null)))
+            .onErrorReturn { GetForeCastResult.Error(it.message) }
             .compose(transformer)
     }
 
@@ -46,10 +47,8 @@ class GetWeatherForecastUseCase @Inject constructor(
     }
 
     private fun prepareResult(list: List<WeatherForeCastModel>): Single<GetForeCastResult> {
-        return Single.just(list).map<GetForeCastResult> {
+        return Single.just(list).map {
             GetForeCastResult.Success(it)
-        }.onErrorReturn {
-            GetForeCastResult.Error(it.message)
         }
     }
 
