@@ -10,7 +10,7 @@ import io.reactivex.Flowable
 @Dao
 interface CityDao {
 
-    @Query("SELECT * FROM selected_cities")
+    @Query("SELECT * FROM selected_cities ORDER BY title ASC")
     fun selectCities(): Flowable<List<CityEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
