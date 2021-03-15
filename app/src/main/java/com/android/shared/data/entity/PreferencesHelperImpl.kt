@@ -1,8 +1,7 @@
-package com.android.weatherforecastapp.forecast.data.entity
+package com.android.shared.data.entity
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import com.android.weatherforecastapp.forecast.data.entity.PreferencesHelper
 import javax.inject.Inject
 
 class PreferencesHelperImpl @Inject constructor(

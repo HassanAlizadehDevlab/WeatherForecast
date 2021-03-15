@@ -1,4 +1,4 @@
-package com.android.weatherforecastapp.forecast.data.entity
+package com.android.shared.data.entity
 
 interface PreferencesHelper {
     fun isCityListInserted(): Boolean

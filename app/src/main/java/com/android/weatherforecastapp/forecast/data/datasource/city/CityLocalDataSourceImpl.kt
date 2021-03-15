@@ -1,6 +1,6 @@
 package com.android.weatherforecastapp.forecast.data.datasource.city
 
-import com.android.weatherforecastapp.forecast.data.entity.PreferencesHelper
+import com.android.shared.data.entity.PreferencesHelper
 import com.android.weatherforecastapp.forecast.data.entity.db.dao.CityDao
 import com.android.weatherforecastapp.forecast.data.entity.db.model.CityEntity
 import io.reactivex.Completable
