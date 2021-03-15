@@ -2,8 +2,10 @@ package com.android.weatherforecastapp.forecast.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.shared.presentation.ViewModelProviderFactory
 import com.android.shared.presentation.adapter.BaseAction
 import com.android.shared.presentation.recyclerview.VerticalDecorator
 import com.android.weatherforecastapp.R
@@ -13,6 +15,7 @@ import com.android.weatherforecastapp.forecast.domain.model.WeatherForeCastModel
 import com.android.weatherforecastapp.forecast.presentation.adapter.CityAdapter
 import com.android.weatherforecastapp.forecast.presentation.adapter.OnCityClickAction
 import com.android.weatherforecastapp.forecast.presentation.adapter.WeatherForecastAdapter
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cityAdapter: CityAdapter
     private lateinit var weatherForecastAdapter: WeatherForecastAdapter
 
+    @Inject
+    lateinit var factory: ViewModelProviderFactory
     private lateinit var viewModel: MainViewModel
 
 
@@ -79,6 +84,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
+        viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
+
         viewModel.cityListObservable.observe(this, ::observeCities)
         viewModel.forecastsObservable.observe(this, ::observeWeatherForecasts)
     }
