@@ -3,8 +3,6 @@ package com.android.weatherforecastapp.forecast.data.model
 import com.google.gson.annotations.SerializedName
 
 data class WeatherForeCast(
-    @SerializedName("id")
-    val id: Int,
     @SerializedName("weather_state_name")
     val weatherStateName: String,
     @SerializedName("weather_state_abbr")

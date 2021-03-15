@@ -5,7 +5,6 @@ import com.android.weatherforecastapp.forecast.domain.model.WeatherForeCastModel
 
 
 fun WeatherForeCast.map(): WeatherForeCastModel = WeatherForeCastModel(
-    id = id,
     weatherStateName = weatherStateName,
     weatherStateAbbr = weatherStateAbbr,
     windDirectionCompass = windDirectionCompass,

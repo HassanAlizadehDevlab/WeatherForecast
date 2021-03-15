@@ -1,7 +1,6 @@
 package com.android.weatherforecastapp.forecast.domain.model
 
 data class WeatherForeCastModel(
-    val id: Int,
     val weatherStateName: String,
     val weatherStateAbbr: String,
     val windDirectionCompass: String,
