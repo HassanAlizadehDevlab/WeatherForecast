@@ -18,11 +18,7 @@ class CityRepositoryImpl @Inject constructor(
 ) : CityRepository {
 
     override fun cities(): Flowable<List<CityModel>> {
-        return Completable.fromCallable {
-            if (!preferences.isCityListInserted()) {
-                localDataSource.insertCities()
-                preferences.cityListIsInserted()
-            }}
+        return localDataSource.insertCities()
             .toFlowable<List<CityModel>>()
             .concatWith(localDataSource.cities().map { it.map() })
     }
