@@ -13,7 +13,6 @@ import com.android.weatherforecastapp.forecast.domain.model.WeatherForeCastModel
 import com.android.weatherforecastapp.forecast.presentation.adapter.CityAdapter
 import com.android.weatherforecastapp.forecast.presentation.adapter.OnCityClickAction
 import com.android.weatherforecastapp.forecast.presentation.adapter.WeatherForecastAdapter
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
