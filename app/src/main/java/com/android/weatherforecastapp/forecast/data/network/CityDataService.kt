@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface CityDataService {
     @GET("location/search/")
-    fun getCity(@Query(value = "query") cityName: String): Single<City>
+    fun getCity(@Query(value = "query") cityName: String): Single<List<City>>
 }

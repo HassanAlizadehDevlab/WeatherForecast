@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ForeCastDataService {
-    @GET("location/cityId/year/month/day/")
+    @GET("location/{cityId}/{year}/{month}/{day}/")
     fun getWeatherForeCasts(
         @Path("cityId") cityId: Int,
         @Path("year") year: String,
