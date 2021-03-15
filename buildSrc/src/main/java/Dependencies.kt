@@ -35,8 +35,8 @@ object Dependencies {
 
     // Database
     private val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
-    private val roomKtx = "implementation 'androidx.room:room-ktx:${Versions.room}"
     private val roomRxJava = "androidx.room:room-rxjava2:${Versions.room}"
+    private val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
 
     // DI
     private val dagger = "com.google.dagger:dagger:${Versions.dagger}"
@@ -45,11 +45,12 @@ object Dependencies {
     private val daggerProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
     private val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
 
+    // Dex
+    private val dex = "androidx.multidex:multidex:${Versions.dex}"
+
     // Test libs
     private val junit = "junit:junit:${Versions.junit}"
     private val extJUnit = "androidx.test.ext:junit:${Versions.extJunit}"
-    private val coroutinesTest =
-        "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     private val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     private val mockk = "io.mockk:mockk:${Versions.mockk}"
     private val arch = "androidx.arch.core:core-testing:${Versions.arch}"
@@ -67,17 +68,16 @@ object Dependencies {
         add(recyclerView)
         add(glide)
         add(constraintLayout)
+        add(dex)
     }
 
     val lifecycleBundle = arrayListOf<String>().apply {
         add(lifecycleViewModel)
-        add(lifecycleRunTime)
         add(lifecycleLiveData)
     }
 
     val threadingBundle = arrayListOf<String>().apply {
         add(rxJava)
-        add(rxKotlin)
         add(rxAndroid)
     }
 
@@ -101,6 +101,10 @@ object Dependencies {
     val daggerKapt = arrayListOf<String>().apply {
         add(daggerProcessor)
         add(daggerCompiler)
+    }
+
+    val roomKapt = arrayListOf<String>().apply {
+        add(roomCompiler)
     }
 
 

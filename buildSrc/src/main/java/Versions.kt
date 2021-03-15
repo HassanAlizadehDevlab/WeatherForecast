@@ -31,9 +31,11 @@ object Versions {
     val room = "2.2.6"
     val roomCoroutines = "2.1.0-alpha04"
 
-
     // Dagger
     val dagger = "2.28"
+
+    // Dex
+    val dex = "2.0.1"
 
 
     // Test

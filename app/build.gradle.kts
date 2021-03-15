@@ -25,6 +25,7 @@ android {
 
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
 
+        multiDexEnabled = true
 
         buildConfigField("String", "BASE_URL", "\"${apiProperties.getProperty("BASE_URL")}\"")
     }
@@ -53,6 +54,7 @@ android {
 
 dependencies {
     kapt(Dependencies.daggerKapt)
+    kapt(Dependencies.roomKapt)
 
     // App libs
     implementation(arrayListOf<String>().apply {
