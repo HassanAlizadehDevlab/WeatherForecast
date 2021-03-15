@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.shared.presentation.ViewModelProviderFactory
 import com.android.shared.presentation.adapter.BaseAction
+import com.android.shared.presentation.recyclerview.HorizontalDecorator
 import com.android.shared.presentation.recyclerview.VerticalDecorator
 import com.android.weatherforecastapp.R
 import com.android.weatherforecastapp.databinding.ActivityMainBinding
@@ -15,6 +16,7 @@ import com.android.weatherforecastapp.forecast.domain.model.WeatherForeCastModel
 import com.android.weatherforecastapp.forecast.presentation.adapter.CityAdapter
 import com.android.weatherforecastapp.forecast.presentation.adapter.OnCityClickAction
 import com.android.weatherforecastapp.forecast.presentation.adapter.WeatherForecastAdapter
+import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -31,12 +33,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidInjection.inject(this)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
         setupRecyclerViews()
         setupObservers()
+
+        viewModel.loadCities()
     }
 
 
@@ -67,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         with(binding.recyclerViewCities) {
             layoutManager = verticalLayoutManager
             addItemDecoration(
-                VerticalDecorator(
+                HorizontalDecorator(
                     margin = resources.getDimensionPixelSize(R.dimen.recycler_view_item_margin)
                 )
             )

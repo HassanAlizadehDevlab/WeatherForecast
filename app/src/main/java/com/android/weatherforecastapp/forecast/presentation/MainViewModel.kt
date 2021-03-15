@@ -46,7 +46,9 @@ class MainViewModel @Inject constructor(
         getWeatherForecastUseCase.execute(GetForeCastRequest(cityId = id))
             .subscribe({
                 onWeatherForeCastsResponse(it)
-            }, {})
+            }, {
+                print(it.message)
+            })
             .track()
     }
 
