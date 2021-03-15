@@ -13,6 +13,7 @@ object Versions {
     val lifecycle = "2.3.0"
     val constraintLayout = "2.0.4"
     val material = "1.3.0"
+    val recyclerView = "1.1.0"
 
     // Threading
     val coroutines = "1.4.2"

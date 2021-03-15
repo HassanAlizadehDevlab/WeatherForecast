@@ -12,16 +12,14 @@ object Dependencies {
     private val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     private val fragment = "androidx.fragment:fragment-ktx:${Versions.fragment}"
     private val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
-    private val lifecycleViewModel =
-        "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+    private val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
     private val lifecycleRunTime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
-    private val lifecycleLiveData =
-        "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+    private val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
 
     // Android UI
-    private val constraintLayout =
-        "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    private val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     private val material = "com.google.android.material:material:${Versions.material}"
+    private val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
 
     // Threading
     private val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
@@ -65,6 +63,7 @@ object Dependencies {
         add(coreKtx)
         add(appcompat)
         add(material)
+        add(recyclerView)
         add(constraintLayout)
     }
 
