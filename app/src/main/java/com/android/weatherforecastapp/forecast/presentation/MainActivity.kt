@@ -1,6 +1,7 @@
 package com.android.weatherforecastapp.forecast.presentation
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -92,8 +93,16 @@ class MainActivity : AppCompatActivity() {
     private fun setupObservers() {
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
 
+        viewModel.isLoadingObservable.observe(this, ::observeLoading)
         viewModel.cityListObservable.observe(this, ::observeCities)
         viewModel.forecastsObservable.observe(this, ::observeWeatherForecasts)
+    }
+
+    private fun observeLoading(isLoading: Boolean) {
+        if (isLoading)
+            binding.progress.show()
+        else
+            binding.progress.hide()
     }
 
     private fun observeCities(cities: List<CityModel>) {
@@ -101,6 +110,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeWeatherForecasts(forecasts: List<WeatherForeCastModel>) {
+        binding.recyclerViewWeatherForeCasts.visibility = View.VISIBLE
         weatherForecastAdapter.setItems(forecasts)
     }
 

@@ -18,11 +18,13 @@ class MainViewModel @Inject constructor(
 
     /****************************** Observables ******************************/
     private val _citiesObservable = MutableLiveData<List<CityModel>>()
-    val cityListObservable: LiveData<List<CityModel>> =
-        Transformations.map(_citiesObservable) { it }
+    val cityListObservable: LiveData<List<CityModel>> = Transformations.map(_citiesObservable) { it }
+
     private val _forecastsObservable = MutableLiveData<List<WeatherForeCastModel>>()
-    val forecastsObservable: LiveData<List<WeatherForeCastModel>> =
-        Transformations.map(_forecastsObservable) { it }
+    val forecastsObservable: LiveData<List<WeatherForeCastModel>> = Transformations.map(_forecastsObservable) { it }
+
+    private val _isLoadingObservable = MutableLiveData<Boolean>()
+    val isLoadingObservable: LiveData<Boolean> = Transformations.map(_isLoadingObservable) { it }
 
 
     /****************************** Requests ******************************/
@@ -30,24 +32,33 @@ class MainViewModel @Inject constructor(
         loadCitiesUseCase.execute(Unit)
             .subscribe({
                 onCitiesResponse(it)
-            }, {})
+            }, {
+                it.printStackTrace()
+            })
             .track()
     }
 
     private fun getCityId(name: String) {
+        _isLoadingObservable.value = true
         getCityIdUseCase.execute(GetCityIdRequest(cityName = name))
             .subscribe({
                 onCityIdResponse(it)
-            }, {})
+            }, {
+                _isLoadingObservable.value = true
+                it.printStackTrace()
+            })
             .track()
     }
 
     private fun getWeatherForeCasts(id: Int) {
+        _isLoadingObservable.value = true
         getWeatherForecastUseCase.execute(GetForeCastRequest(cityId = id))
             .subscribe({
+                _isLoadingObservable.value = false
                 onWeatherForeCastsResponse(it)
             }, {
-                print(it.message)
+                _isLoadingObservable.value = false
+                it.printStackTrace()
             })
             .track()
     }
@@ -73,6 +84,7 @@ class MainViewModel @Inject constructor(
                 getWeatherForeCasts(response.cityId)
             }
             is GetCityIdResult.Error -> {
+                _isLoadingObservable.value = false
                 response.error?.let {
                     _messageObservable.value = it
                 }

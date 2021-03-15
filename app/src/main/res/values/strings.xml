@@ -3,4 +3,5 @@
 
     <string name="internal_server_error">Internal Server Error</string>
     <string name="unknown_error">Unknown Error</string>
+    <string name="choose_one_of_the_cities">Choose one of the cities</string>
 </resources>
