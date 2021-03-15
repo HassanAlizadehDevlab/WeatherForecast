@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Weather Forecast App</string>
 
+    <string name="retry_again_please">Retry again please</string>
+    <string name="server_not_responding">Server not responding</string>
+    <string name="no_internet">Please check your network connectivity</string>
     <string name="internal_server_error">Internal Server Error</string>
     <string name="unknown_error">Unknown Error</string>
     <string name="choose_one_of_the_cities">Choose one of the cities</string>

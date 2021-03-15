@@ -30,7 +30,7 @@ class GetWeatherForecastUseCase @Inject constructor(
             .concatMap { reverseTheList(it).toFlowable() }
             .concatMap { prepareResult(it).toFlowable() }
             .single(GetForeCastResult.Error(errorHandler.getMessage(null)))
-            .onErrorReturn { GetForeCastResult.Error(it.message) }
+            .onErrorReturn { GetForeCastResult.Error(errorHandler.getMessage(it))}
             .compose(transformer)
     }
 
