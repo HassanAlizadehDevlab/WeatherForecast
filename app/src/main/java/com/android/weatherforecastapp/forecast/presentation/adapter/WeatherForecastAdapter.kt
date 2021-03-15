@@ -5,19 +5,19 @@ import android.view.ViewGroup
 import com.android.shared.presentation.adapter.BaseRecyclerAdapter
 import com.android.shared.presentation.adapter.BaseViewHolder
 import com.android.weatherforecastapp.R
-import com.android.weatherforecastapp.databinding.AdapterCityBinding
-import com.android.weatherforecastapp.forecast.domain.model.CityModel
+import com.android.weatherforecastapp.databinding.AdapterWeatherForecastBinding
+import com.android.weatherforecastapp.forecast.domain.model.WeatherForeCastModel
 
-class WeatherForecastAdapter : BaseRecyclerAdapter<CityModel>() {
+class WeatherForecastAdapter : BaseRecyclerAdapter<WeatherForeCastModel>() {
 
     private val FORE_CAST_VIEW: Int = R.layout.adapter_weather_forecast
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<CityModel> {
-        return CityViewHolder(
-            AdapterCityBinding.inflate(
+    ): BaseViewHolder<WeatherForeCastModel> {
+        return WeatherForecastViewHolder(
+            AdapterWeatherForecastBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
