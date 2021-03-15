@@ -20,6 +20,7 @@ object Dependencies {
     private val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     private val material = "com.google.android.material:material:${Versions.material}"
     private val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
+    private val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
 
     // Threading
     private val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
@@ -64,6 +65,7 @@ object Dependencies {
         add(appcompat)
         add(material)
         add(recyclerView)
+        add(glide)
         add(constraintLayout)
     }
 
