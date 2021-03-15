@@ -22,7 +22,7 @@ class GetWeatherForecastUseCase @Inject constructor(
                 repository.weatherForeCast(
                     cityId = param.cityId,
                     year = tomorrow.get(Calendar.YEAR).toString(),
-                    month = tomorrow.get(Calendar.MONTH).toString(),
+                    month = tomorrow.get(Calendar.MONTH).plus(1).toString(),
                     day = tomorrow.get(Calendar.DATE).toString(),
                 )
             }
