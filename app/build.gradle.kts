@@ -1,8 +1,14 @@
+import java.io.FileInputStream
+import java.util.*
+
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
 }
+
+val apiProperties = Properties()
+apiProperties.load(FileInputStream(rootProject.file("api.properties")))
 
 android {
     compileSdkVersion(AppConfig.compileSdk)
@@ -18,6 +24,9 @@ android {
         versionName = AppConfig.versionName
 
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
+
+
+        buildConfigField("String", "BASE_URL", "\"${apiProperties.getProperty("BASE_URL")}\"")
     }
 
     buildTypes {
