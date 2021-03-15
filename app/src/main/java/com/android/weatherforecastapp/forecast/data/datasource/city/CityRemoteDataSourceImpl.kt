@@ -10,6 +10,6 @@ class CityRemoteDataSourceImpl @Inject constructor(
 ) : CityRemoteDataSource {
 
     override fun cityId(name: String): Single<City> {
-        return service.getCity(cityName = name)
+        return service.getCity(cityName = name).map { it.firstOrNull() }
     }
 }
