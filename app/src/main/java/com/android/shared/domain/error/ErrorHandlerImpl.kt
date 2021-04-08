@@ -1,7 +1,7 @@
 package com.android.shared.domain.error
 
 import android.content.Context
-import com.android.weatherforecastapp.R
+import com.android.app.R
 import java.io.IOException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
