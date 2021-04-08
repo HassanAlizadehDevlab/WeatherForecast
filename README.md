@@ -1,5 +1,6 @@
 # WeatherForecast
-#### APK file uploadded in root of the project. "app-debug.apk"
+### Weather Forecast Application for bunch of cities.
+#### APK file uploaded in root of the project. "app-debug.apk"
 
 ### I have implemented this project by using:
 - Kotlin Language
