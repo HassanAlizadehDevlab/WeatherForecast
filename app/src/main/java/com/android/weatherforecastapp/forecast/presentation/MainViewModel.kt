@@ -26,6 +26,9 @@ class MainViewModel @Inject constructor(
     private val _isLoadingObservable = MutableLiveData<Boolean>()
     val isLoadingObservable: LiveData<Boolean> = Transformations.map(_isLoadingObservable) { it }
 
+    private val _selectedCity = MutableLiveData<CityModel>()
+    val selectedCityTitle : LiveData<String>  = Transformations.map(_selectedCity) { it.title }
+
 
     /****************************** Requests ******************************/
     fun loadCities() {
@@ -44,7 +47,7 @@ class MainViewModel @Inject constructor(
             .subscribe({
                 onCityIdResponse(it)
             }, {
-                _isLoadingObservable.value = true
+                _isLoadingObservable.value = false
                 it.printStackTrace()
             })
             .track()
@@ -108,6 +111,10 @@ class MainViewModel @Inject constructor(
 
     /****************************** Clicks ******************************/
     fun onCityClicked(city: CityModel) {
+        if (city == _selectedCity.value) return
+
+        _selectedCity.value = city
+
         if (city.woeid == null)
             getCityId(city.title)
         else

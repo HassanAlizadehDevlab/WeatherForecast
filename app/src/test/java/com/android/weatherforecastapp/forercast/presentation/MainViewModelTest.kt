@@ -35,7 +35,7 @@ class MainViewModelTest {
     )
 
     @Test
-    fun `get selected city - success`() {
+    fun `get saved cities - success`() {
         val responseObserver: (List<CityModel>) -> Unit = mockk()
         viewModel.cityListObservable.observeOnce(responseObserver)
         val response = LoadCityResult.Success(CityTestModelProvider.getCityModels())
@@ -49,7 +49,7 @@ class MainViewModelTest {
     }
 
     @Test
-    fun `when city has no id, call usecase to get it then call usecase get weather forecasts - success`() {
+    fun `when city has no id, call to get it then get weather forecasts - success`() {
         val city = CityTestModelProvider.getCityModels()[0]
         val cityRequest = GetCityIdRequest(cityName = city.title)
         val cityResponse = CityTestModelProvider.getGothenburg().woeid!!
@@ -69,7 +69,7 @@ class MainViewModelTest {
     }
 
     @Test
-    fun `when city has id, call usecase to get it then call usecase get weather forecasts and don't call get city id usecase - success`() {
+    fun `when city has id, call to get it then get weather forecasts and don't call get city id usecase - success`() {
         val city = CityTestModelProvider.getGothenburg()
         val cityRequest = GetCityIdRequest(cityName = city.title)
         val cityResponse = CityTestModelProvider.getGothenburg().woeid!!
@@ -109,4 +109,28 @@ class MainViewModelTest {
 
         verify { forecastsObserver.invoke(forecastsResponse) }
     }
+
+    @Test
+    fun `select city then fill live data to show the selected city name in view - success`() {
+        val city = CityTestModelProvider.getCityModels()[0]
+        val cityRequest = GetCityIdRequest(cityName = city.title)
+        val cityResponse = CityTestModelProvider.getGothenburg().woeid!!
+        val cityResult = GetCityIdResult.Success(cityId = cityResponse)
+
+        val forecastsRequest = GetForeCastRequest(cityId = cityResult.cityId)
+        val forecastsResponse = ForeCastTestModelProvider.weatherForeCastModelList()
+        val forecastsResult = GetForeCastResult.Success(weatherForecasts = forecastsResponse)
+
+        val selectedCityTitleObserver: (String) -> Unit = mockk()
+        viewModel.selectedCityTitle.observeOnce(selectedCityTitleObserver)
+
+        every { getCityIdUseCase.execute(cityRequest) } returns Single.just(cityResult)
+        every { getWeatherForecastUseCase.execute(forecastsRequest) } returns Single.just(forecastsResult)
+        every { selectedCityTitleObserver.invoke(any()) } returns Unit
+
+        viewModel.onCityClicked(city)
+
+        verify { selectedCityTitleObserver.invoke(city.title) }
+    }
+
 }

@@ -98,6 +98,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.isLoadingObservable.observe(this, ::observeLoading)
         viewModel.cityListObservable.observe(this, ::observeCities)
         viewModel.forecastsObservable.observe(this, ::observeWeatherForecasts)
+        viewModel.selectedCityTitle.observe(this, ::observeCityTitle)
     }
 
     private fun observeMessage(message: String) {
@@ -118,6 +119,10 @@ class MainActivity : AppCompatActivity() {
     private fun observeWeatherForecasts(forecasts: List<WeatherForeCastModel>) {
         binding.recyclerViewWeatherForeCasts.visibility = View.VISIBLE
         weatherForecastAdapter.setItems(forecasts)
+    }
+
+    private fun observeCityTitle(title: String) {
+        supportActionBar?.title = title
     }
 
 }
