@@ -42,6 +42,6 @@ object Versions {
     val junit = "4.12"
     val extJunit = "1.1.2"
     val espresso = "3.2.0"
-    val mockk = "1.10.6"
+    val mockk = "1.11.0"
     val arch = "2.1.0"
 }
