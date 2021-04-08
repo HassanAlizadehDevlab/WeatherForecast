@@ -111,8 +111,6 @@ class MainViewModel @Inject constructor(
 
     /****************************** Clicks ******************************/
     fun onCityClicked(city: CityModel) {
-        if (city == _selectedCity.value) return
-
         _selectedCity.value = city
 
         if (city.woeid == null)
