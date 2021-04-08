@@ -1,6 +1,6 @@
 package com.android.weatherforecastapp.forecast.domain.usecase
 
-import com.android.shared.domain.string.ErrorHandler
+import com.android.shared.domain.error.ErrorHandler
 import com.android.shared.domain.usecase.AsyncUseCase
 import com.android.shared.domain.usecase.transformer.STransformer
 import com.android.weatherforecastapp.forecast.domain.repository.CityRepository

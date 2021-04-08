@@ -1,4 +1,4 @@
-package com.android.shared.domain.string
+package com.android.shared.domain.error
 
 import android.content.Context
 import com.android.weatherforecastapp.R

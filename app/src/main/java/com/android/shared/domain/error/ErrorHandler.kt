@@ -1,4 +1,4 @@
-package com.android.shared.domain.string
+package com.android.shared.domain.error
 
 /**
  * An interface to get proper message from string resources in usecases
