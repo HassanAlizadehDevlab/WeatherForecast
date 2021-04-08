@@ -5,7 +5,7 @@ import com.android.shared.utils.observeOnce
 import com.android.app.weatherforecast.domain.model.CityModel
 import com.android.app.weatherforecast.domain.model.WeatherForeCastModel
 import com.android.app.weatherforecast.domain.usecase.*
-import com.android.app.weatherforecast.presentation.view.MainViewModel
+import com.android.app.weatherforecast.presentation.view.WeatherForecastViewModel
 import com.android.app.forercast.CityTestModelProvider
 import com.android.app.forercast.ForeCastTestModelProvider
 import io.mockk.every
@@ -19,7 +19,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class MainViewModelTest {
+class WeatherForecastViewModelTest {
 
     @Rule
     @JvmField
@@ -28,7 +28,7 @@ class MainViewModelTest {
     private val loadCitiesUseCase: LoadCitiesUseCase = mockk()
     private val getCityIdUseCase: GetCityIdUseCase = mockk()
     private val getWeatherForecastUseCase: GetWeatherForecastUseCase = mockk()
-    private val viewModel = MainViewModel(
+    private val viewModel = WeatherForecastViewModel(
         loadCitiesUseCase,
         getCityIdUseCase,
         getWeatherForecastUseCase

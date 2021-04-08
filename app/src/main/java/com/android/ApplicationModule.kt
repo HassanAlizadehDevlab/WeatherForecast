@@ -5,13 +5,13 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import com.android.app.MainActivity
+import com.android.app.MainActivityModule
+import com.android.app.weatherforecast.data.entity.db.WeatherDatabase
 import com.android.shared.SharedModule
 import com.android.shared.data.entity.PreferencesHelper
 import com.android.shared.data.entity.PreferencesHelperImpl
 import com.android.shared.di.scope.ActivityScope
-import com.android.app.MainPageModule
-import com.android.app.weatherforecast.data.entity.db.WeatherDatabase
-import com.android.app.MainActivity
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -29,13 +29,18 @@ import javax.inject.Singleton
 )
 abstract class ApplicationModule {
 
-    /****************** Activities ******************/
+    /****************** Activity ******************/
     @ActivityScope
-    @ContributesAndroidInjector(modules = [MainPageModule::class])
+    @ContributesAndroidInjector(modules = [MainActivityModule::class])
     abstract fun mainActivityInjector(): MainActivity
 
 
     /****************** Basic dependencies ******************/
+
+    @Binds
+    @Singleton
+    abstract fun context(application: ForecastApplication): Context
+
     @Binds
     @Singleton
     abstract fun application(application: ForecastApplication): Application

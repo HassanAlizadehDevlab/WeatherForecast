@@ -1,4 +1,4 @@
-package com.android.app
+package com.android.app.weatherforecast
 
 import com.android.app.weatherforecast.data.DataModule
 import com.android.app.weatherforecast.domain.DomainModule
@@ -12,4 +12,4 @@ import dagger.Module
         PresentationModule::class,
     ]
 )
-abstract class MainPageModule
+abstract class WeatherForeCastModule

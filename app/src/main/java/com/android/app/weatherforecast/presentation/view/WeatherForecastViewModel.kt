@@ -9,7 +9,7 @@ import com.android.app.weatherforecast.domain.model.WeatherForeCastModel
 import com.android.app.weatherforecast.domain.usecase.*
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(
+class WeatherForecastViewModel @Inject constructor(
     private val loadCitiesUseCase: LoadCitiesUseCase,
     private val getCityIdUseCase: GetCityIdUseCase,
     private val getWeatherForecastUseCase: GetWeatherForecastUseCase,

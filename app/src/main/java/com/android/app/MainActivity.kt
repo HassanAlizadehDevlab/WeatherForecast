@@ -1,128 +1,32 @@
 package com.android.app
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android.shared.presentation.ViewModelProviderFactory
-import com.android.shared.presentation.adapter.BaseAction
 import com.android.app.databinding.ActivityMainBinding
-import com.android.app.weatherforecast.domain.model.CityModel
-import com.android.app.weatherforecast.domain.model.WeatherForeCastModel
-import com.android.app.weatherforecast.presentation.view.MainViewModel
-import com.android.app.weatherforecast.presentation.adapter.CityAdapter
-import com.android.app.weatherforecast.presentation.adapter.OnCityClickAction
-import com.android.app.weatherforecast.presentation.adapter.WeatherForecastAdapter
-import com.android.shared.presentation.recyclerview.HorizontalDecorator
-import com.android.shared.presentation.recyclerview.VerticalDecorator
-import com.google.android.material.snackbar.Snackbar
+import com.android.shared.presentation.navigator.Navigator
 import dagger.android.AndroidInjection
+import dagger.android.DaggerActivity
+import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var cityAdapter: CityAdapter
-    private lateinit var weatherForecastAdapter: WeatherForecastAdapter
-
     @Inject
-    lateinit var factory: ViewModelProviderFactory
-    private lateinit var viewModel: MainViewModel
+    lateinit var navigator: Navigator
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AndroidInjection.inject(this)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        setupRecyclerViews()
-        setupObservers()
 
-        viewModel.loadCities()
-    }
-
-
-    private fun setupRecyclerViews() {
-        setupWeatherForecastRecyclerView()
-        setupCityRecyclerView()
-    }
-
-    private fun setupWeatherForecastRecyclerView() {
-        weatherForecastAdapter = WeatherForecastAdapter()
-        val verticalLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-
-        with(binding.recyclerViewWeatherForeCasts) {
-            layoutManager = verticalLayoutManager
-            addItemDecoration(
-                VerticalDecorator(
-                    margin = resources.getDimensionPixelSize(R.dimen.recycler_view_item_margin)
-                )
-            )
-            adapter = weatherForecastAdapter
-        }
-    }
-
-    private fun setupCityRecyclerView() {
-        cityAdapter = CityAdapter(::observeCityClicks)
-        val verticalLayoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-
-        with(binding.recyclerViewCities) {
-            layoutManager = verticalLayoutManager
-            addItemDecoration(
-                HorizontalDecorator(
-                    margin = resources.getDimensionPixelSize(R.dimen.recycler_view_item_margin)
-                )
-            )
-            adapter = cityAdapter
-        }
-    }
-
-    private fun observeCityClicks(action: BaseAction) {
-        when (action) {
-            is OnCityClickAction -> {
-                viewModel.onCityClicked(action.data)
-            }
-        }
-    }
-
-    private fun setupObservers() {
-        viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
-
-        viewModel.messageObservable.observe(this, ::observeMessage)
-        viewModel.isLoadingObservable.observe(this, ::observeLoading)
-        viewModel.cityListObservable.observe(this, ::observeCities)
-        viewModel.forecastsObservable.observe(this, ::observeWeatherForecasts)
-        viewModel.selectedCityTitle.observe(this, ::observeCityTitle)
-    }
-
-    private fun observeMessage(message: String) {
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
-    }
-
-    private fun observeLoading(isLoading: Boolean) {
-        if (isLoading)
-            binding.progress.show()
-        else
-            binding.progress.hide()
-    }
-
-    private fun observeCities(cities: List<CityModel>) {
-        cityAdapter.setItems(cities)
-    }
-
-    private fun observeWeatherForecasts(forecasts: List<WeatherForeCastModel>) {
-        binding.recyclerViewWeatherForeCasts.visibility = View.VISIBLE
-        weatherForecastAdapter.setItems(forecasts)
-    }
-
-    private fun observeCityTitle(title: String) {
-        supportActionBar?.title = title
+        if (savedInstanceState == null)
+            navigator.showWeatherForeCast()
     }
 
 }
