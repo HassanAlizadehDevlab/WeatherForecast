@@ -7,7 +7,7 @@ import java.util.*
 object DateUtils {
 
     const val DATE_FORMAT_12 = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-    const val DATE_FORMAT_2 = "h:mm a"
+    const val DATE_FORMAT_2 = "MM/dd h:mm a"
 
     /**
      * Convert one date format string  to another date format string in android
